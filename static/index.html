@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Multi-provider RAG Agent</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">R</div>
+        <div>
+          <h1>RAG Agent</h1>
+          <p id="providerLabel">Loading provider...</p>
+        </div>
+      </div>
+
+      <section class="panel">
+        <h2>Documents</h2>
+        <label class="upload-box">
+          <input id="fileInput" type="file" multiple accept=".pdf,.txt,.md,.csv,.json,.html,.htm" />
+          <span>Drop or choose files</span>
+          <small>PDF, TXT, MD, CSV, JSON, HTML</small>
+        </label>
+        <button id="uploadBtn">Upload & ingest</button>
+        <button id="clearBtn" class="secondary">Clear database</button>
+        <div id="uploadStatus" class="status"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Search Settings</h2>
+        <label>
+          Top K
+          <input id="topK" type="number" min="1" max="20" value="5" />
+        </label>
+        <label>
+          Retrieval mode
+          <select id="retrievalMode">
+            <option value="hybrid">Hybrid</option>
+            <option value="vector">Vector only</option>
+            <option value="keyword">Keyword only</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="panel muted">
+        <h2>Tip</h2>
+        <p>Upload documents first, then ask questions. Answers include source citations.</p>
+      </section>
+    </aside>
+
+    <main class="chat">
+      <div id="messages" class="messages">
+        <div class="message assistant">
+          <div class="avatar">AI</div>
+          <div class="bubble">
+            <p>Hello! Upload some documents, then ask me questions about them.</p>
+          </div>
+        </div>
+      </div>
+
+      <form id="chatForm" class="composer">
+        <textarea id="questionInput" placeholder="Ask anything about your uploaded documents..." rows="1"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
