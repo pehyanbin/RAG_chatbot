@@ -20,9 +20,15 @@ function addMessage(role, text, citations = []) {
   const bubble = document.createElement("div");
   bubble.className = "bubble";
 
-  const p = document.createElement("p");
-  p.textContent = text;
-  bubble.appendChild(p);
+  const content = document.createElement("div");
+
+  if (role === "assistant" && window.marked) {
+    content.innerHTML = marked.parse(text);
+  } else {
+    content.textContent = text;
+  }
+
+  bubble.appendChild(content);
 
   if (citations && citations.length) {
     const citationsBox = document.createElement("div");
